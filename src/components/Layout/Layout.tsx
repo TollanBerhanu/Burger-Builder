@@ -1,7 +1,7 @@
 import React from "react";
 import './Layout.scss'
 
-const layout = (props: any) => {
+const Layout = (props: any) => {
     return(
         <div className="Layout">
             <div>Toolbar, sidebar, backdrop</div>
@@ -12,4 +12,4 @@ const layout = (props: any) => {
     )
 }
 
-export default layout;
+export default Layout;

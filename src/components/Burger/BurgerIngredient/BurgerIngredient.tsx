@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes, { string } from 'prop-types';
 import './BurgerIngredient.scss'
 
-const burgerIngredient = (props: {type: string}) => {
+const BurgerIngredient = (props: {type: string}) => {
     let ingredient = null;
-    console.log('Hellooo')
-    console.log(props)
+    
     switch(props.type){
         case 'bread-bottom':
             ingredient = <div className="BreadBottom"></div>;
@@ -36,8 +35,8 @@ const burgerIngredient = (props: {type: string}) => {
     return ingredient;
 }
 
-burgerIngredient.propTypes = {
+BurgerIngredient.propTypes = {
     type: PropTypes.string.isRequired
 }
 
-export default burgerIngredient;
+export default BurgerIngredient;
