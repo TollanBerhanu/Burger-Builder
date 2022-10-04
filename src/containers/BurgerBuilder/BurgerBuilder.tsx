@@ -46,13 +46,11 @@ function BurgerBuilder(props: any){
 
     return(
         <>
-            <p>Meat{ingredients.meat}</p>
-            <p>Salad{ingredients.salad}</p>
-            <p>Bacon{ingredients.bacon}</p>
-            <p>Cheese{ingredients.cheese}</p>
-            <p>{price}</p>
             <Burger ingredients={ingredients}/>
-            <BuildControls ingredientAdded={addIngredientHandler} ingredientRemoved={removeIngredientHandler} />
+            <BuildControls 
+                ingredientAdded={addIngredientHandler} 
+                ingredientRemoved={removeIngredientHandler}
+                ingredients={ingredients} />
         </>
     );
 }

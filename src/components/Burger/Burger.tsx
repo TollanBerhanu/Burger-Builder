@@ -12,7 +12,7 @@ const Burger = (props: any) => {
         }, []) // Set initial value to empty array
         if(ingredients.length === 0)
             ingredients = [<p>Please start adding ingredients!</p>]
-        else console.log(ingredients)
+        // else console.log(ingredients)
         
     return(
         <div className="Burger">
