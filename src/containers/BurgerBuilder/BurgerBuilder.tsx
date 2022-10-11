@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGRIDIENT_PRICES = {
     salad: 0.5,
@@ -16,9 +18,21 @@ function BurgerBuilder(props: any){
         cheese: 0,
         meat: 0,
     })
+    const [price, setPrice] = useState(4.00)
+    const [purchaseable, setPurchaseable] = useState(false)
+    const [ordered, setOrdered] = useState(false)
 
-    const [price, setPrice] = useState(4)
-
+    const updatePurchaseableState = (updatedIngredients: any) => {
+        let sumIng = Object.keys(updatedIngredients).map((ingKey) => {
+            return updatedIngredients[ingKey]
+        })
+        .reduce((sum, el) => {
+            return sum + el
+        }, 0)
+        console.log('Purchasable: ' + sumIng)
+        console.log(ingredients)
+        setPurchaseable(sumIng > 0)
+    }
     const addIngredientHandler = (type: string) => {
         const updatedIngredients  = {
             ...ingredients
@@ -26,9 +40,8 @@ function BurgerBuilder(props: any){
         // 'type' is a key with type of ingredients ... this is done to avoid typescript error
         updatedIngredients[type as keyof typeof ingredients] += 1
         setIngreients(updatedIngredients) // Update the ingredients
-        let updatedPrice = price
-        updatedPrice += INGRIDIENT_PRICES[type as keyof typeof ingredients]
-        setPrice(updatedPrice) // Update the price
+        setPrice(price + INGRIDIENT_PRICES[type as keyof typeof ingredients]) // Update the price
+        updatePurchaseableState(updatedIngredients)
     }
 
     const removeIngredientHandler = (type: string): boolean => {
@@ -39,18 +52,40 @@ function BurgerBuilder(props: any){
             updatedIngredients[type as keyof typeof ingredients] -= 1
             setIngreients(updatedIngredients)
             setPrice(price - INGRIDIENT_PRICES[type as keyof typeof ingredients])
+            updatePurchaseableState(updatedIngredients)
             return true
         }
         else return false
     }
 
+    const orderHandler = () => {
+        setOrdered(true)
+    }
+    const closeOrderModalHandler = () => {
+        setOrdered(false)
+    }
+    const continuePurchaseHandler = () => {
+        alert('Purchased!')
+    }
+
     return(
         <>
+            
+            <Modal show={ordered} modalClosed={closeOrderModalHandler}>
+                <OrderSummary ingredients={ingredients}
+                    price={price}
+                    purchaseCancelled={closeOrderModalHandler}
+                    purchaseContinued={continuePurchaseHandler} />
+            </Modal>
+            
             <Burger ingredients={ingredients}/>
             <BuildControls 
                 ingredientAdded={addIngredientHandler} 
                 ingredientRemoved={removeIngredientHandler}
-                ingredients={ingredients} />
+                ingredients={ingredients}
+                price={price}
+                purchaseable={purchaseable}
+                ordered={orderHandler} />
         </>
     );
 }

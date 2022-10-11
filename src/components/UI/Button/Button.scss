@@ -1,0 +1,34 @@
+.Button{
+    display: inline;
+    .Btn{
+        background-color: transparent;
+        border: none;
+        color: white;
+        outline: none;
+        cursor: pointer;
+        font: inherit;
+        padding: 10px;
+        margin: 10px;
+        font-weight: bold;
+        width: 40%;
+        border: 1px solid salmon;
+    }
+    
+    .Success {
+        color: #5C9210;
+    }
+    
+    .Success:hover{
+        background-color: limegreen;
+        color: white;
+    }
+    
+    .Danger {
+        color: #944317;
+    }
+
+    .Danger:hover{
+        background-color: salmon;
+        color: white;
+    }
+}
