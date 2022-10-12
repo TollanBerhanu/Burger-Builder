@@ -12,7 +12,17 @@
     box-sizing: border-box; // Makes sure the toolbar is sized correctly
     z-index: 90;
 
-    .nav{
+    nav{
         height: 100%;
+    }
+
+    .Toolbar_Logo{
+        height: 80%;
+    }
+}
+
+@media (max-width: 500px){
+    .Toolbar_Nav{
+        display: none;
     }
 }

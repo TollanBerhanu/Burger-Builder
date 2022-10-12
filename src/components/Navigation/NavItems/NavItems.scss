@@ -2,7 +2,14 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex; // align items next to eachother
+    display: flex;
+    flex-flow: column; // align items beneath to eachother
     align-items: center; // vertical alignment
     height: 100%;
+}
+
+@media (min-width: 500px){
+    .NavItems{
+        flex-flow: row; // align items next to eachother (default behavior)
+    }
 }
