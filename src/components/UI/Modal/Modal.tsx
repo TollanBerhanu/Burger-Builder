@@ -9,8 +9,9 @@ class Modal extends Component { // You can also extend PureComponent, but it wil
     componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any): void {
         console.log('Modal component updated!')
     }
-    shouldComponentUpdate(nextProps: Readonly<{show: boolean}>, nextState: Readonly<{}>, nextContext: any): boolean {
-        return nextProps.show !== this.props.show
+    shouldComponentUpdate(nextProps: Readonly<{show: boolean, children: any}>, nextState: Readonly<{}>, nextContext: any): boolean {
+        //The modal should update when it is shown and when its content changes from order summary to loading spinner
+        return nextProps.show !== this.props.show || (nextProps.children !== this.props.childern)
     }
     
     render(){
